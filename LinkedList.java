@@ -19,8 +19,8 @@ import java.util.Scanner;
 }
    
      static Node head,temp;
-  
-     void insert()
+  //insert node at last.
+    public void insert()
     { 
           System.out.println("enter data");
            Scanner sc=new Scanner(System.in);
@@ -43,7 +43,7 @@ import java.util.Scanner;
     }
     
    
-    
+    //print nodes.
       void printll()
         {
        Node ptr=head;
@@ -64,6 +64,7 @@ import java.util.Scanner;
         
         
     }
+      //reverse linked list function
    void reverse()
 {
     Node prevsnode,currentnode,nextnode;
@@ -80,14 +81,92 @@ import java.util.Scanner;
     }
     head=prevsnode;
 }
+   //i create cycle in linked list,
+   //then i create detect cycle(),
+   
+   void createcycle()
+   {
+       Node curr;
+       curr=head;
+       while(curr.next!=null)
+       {
+         curr=curr.next;  
+       }
+       // last node point to 2nd node .
+       curr.next=head.next;
+   }
+   // to detect linked list i used floyd algorithm
+   void detectcycle()
+  {
+      Node fast=head,slow=head;
+      while(fast!=null&&fast.next!=null)
+      {
+          fast=fast.next.next;
+          slow=slow.next;
+          if(slow==fast)
+          {
+              System.out.println("cycle found");
+              break;
+          }
+          if(fast.next==null)
+          {
+              System.out.println("cycle not found");
+          }
+      }
+      
+
+   }
+   
+ 
+   //find starting node of loop
+   void startnode()
+   {
+        Node fast=head,slow=head;
+      while(fast!=null&&fast.next!=null)
+      {
+          fast=fast.next.next;
+          slow=slow.next;
+          if(slow==fast)
+          {
+              break;
+          }
+      }
+          slow=head;
+          while(fast!=slow)
+          {
+              fast=fast.next;
+              slow=slow.next;
+          }
+          System.out.println(fast.data);
+       
+   }
+   //break loop
+   void breakLoop()
+   {
+        Node fast=head,slow=head,ptr;
+      while(fast!=null&&fast.next!=null)
+      {
+          fast=fast.next.next;
+          slow=slow.next;
+          
+          if(slow==fast)
+          {
+              break;
+          }
+      }
+      
+          fast.next=null;
+       
+   }
  }
+
     
     
     
     
 
 
-public class ReverseLL
+public class LinkedList
 {
 public static void main(String[] args) 
     {
@@ -96,7 +175,14 @@ public static void main(String[] args)
         
         while(choice!=10)
         {
-        System.out.println("enter 1 for add data \n enter 2 for display \n enter 3 for reverse ");
+        System.out.println("""
+                           enter 1 for add data 
+                            enter 2 for display 
+                            enter 3 for reverse
+                           enter 4 for loop
+                           enter 5 for detect loop
+                           enter 7 for break loop
+                           """);
         System.out.println("enter choice");
         Scanner sc=new Scanner(System.in);
         choice=sc.nextInt();
@@ -117,6 +203,30 @@ public static void main(String[] args)
             case 3 ->       
             {
              list.reverse();
+             
+               break;
+            }
+            case 4 ->       
+            {
+             list.createcycle();
+             
+               break;
+            }
+             case 5 ->       
+            {
+             list.detectcycle();
+             
+               break;
+            }
+            case 6 ->       
+            {
+             list.startnode();
+             
+               break;
+            }
+            case 7 ->       
+            {
+             list.breakLoop();
              
                break;
             }
