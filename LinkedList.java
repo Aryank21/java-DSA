@@ -55,10 +55,10 @@ import java.util.Scanner;
        {
        while(ptr.next!=null)
        {
-           System.out.print(ptr.data+"->");
+           System.out.print(ptr.data);
            ptr=ptr.next;
        }
-          System.out.println(ptr.data+"-> null");
+         System.out.println(ptr.data+"-> null");
        }
            
         
@@ -158,6 +158,48 @@ import java.util.Scanner;
           fast.next=null;
        
    }
+   void ReverseListGroup(int k)
+   {
+       Node tail=head;
+       Node start=head;
+       while(tail.next!=null)
+       {
+           tail=tail.next;
+       }
+       tail.next=start;
+      Node prev,curr,nextnode;
+
+    curr=head;
+    nextnode=head;
+       prev=tail;
+       int count=0;
+    while(count<k)
+    {
+        nextnode=nextnode.next;
+        curr.next=prev;
+        prev=curr;
+        curr=nextnode;
+        count++;
+    }
+    head=prev;
+    
+       Node prev2=null;
+       while(nextnode!=start)
+       {
+           nextnode=nextnode.next;
+        curr.next=prev2;
+        prev2=curr;
+        curr=nextnode;
+        //count++;
+           
+           
+       }
+      curr.next=prev2;
+      
+       
+       
+       
+   }
  }
 
     
@@ -182,6 +224,7 @@ public static void main(String[] args)
                            enter 4 for loop
                            enter 5 for detect loop
                            enter 7 for break loop
+                           enter 8 for reverse group loop
                            """);
         System.out.println("enter choice");
         Scanner sc=new Scanner(System.in);
@@ -229,6 +272,10 @@ public static void main(String[] args)
              list.breakLoop();
              
                break;
+            }
+            case 8 ->       
+            {
+            list.ReverseListGroup(2);
             }
         }
         }
